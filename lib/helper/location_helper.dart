@@ -1,5 +1,5 @@
 const apiKey =
-    "pk.eyJ1IjoiY2hpcmFnMDQ2OSIsImEiOiJja2x1bGxxYXIwamhsMm5zNXN0bXdtM2owIn0.IllYOMgnei87qftMxXJ-sg";
+    "YOUR_MAPBOX_API_KEY";
 
 class LocationHelper {
   static String getLocationPreviewImage({
