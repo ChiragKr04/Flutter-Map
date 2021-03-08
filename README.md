@@ -1,6 +1,6 @@
-# native_device_cide
+# Flutter Map
 
-A new Flutter application.
+Flutter map implementation with Map Box Api 
 
 ## Getting Started
 
