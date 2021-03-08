@@ -17,7 +17,7 @@ class _LocationInputState extends State<LocationInput> {
   LatLng defaultCords;
   LatLng backedResult;
   String mapBoxToken =
-      "pk.eyJ1IjoiY2hpcmFnMDQ2OSIsImEiOiJja2x1bGxxYXIwamhsMm5zNXN0bXdtM2owIn0.IllYOMgnei87qftMxXJ-sg";
+      "YOUR_MAP_BOX_API_KEY";
 
   Future<void> _getUserLocation() async {
     setState(() {
