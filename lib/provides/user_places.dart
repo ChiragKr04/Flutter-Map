@@ -10,12 +10,12 @@ class UserPlaces with ChangeNotifier {
     return [..._items];
   }
 
-  void addPlace(File image, String title) {
+  void addPlace(File image, String title, PlaceLocation loc) {
     final newPlace = Place(
       id: DateTime.now().toString(),
       image: image,
       title: title,
-      location: null.toString(),
+      location: loc,
     );
     _items.add(newPlace);
     notifyListeners();
@@ -23,6 +23,8 @@ class UserPlaces with ChangeNotifier {
       "id": newPlace.id,
       "title": newPlace.title,
       "image": newPlace.image.path,
+      "loc_lat": loc.latitude,
+      "loc_lng": loc.longitude,
     });
   }
 
@@ -33,7 +35,11 @@ class UserPlaces with ChangeNotifier {
               id: e['id'],
               image: File(e['image']),
               title: e['title'],
-              location: null.toString(),
+              location: PlaceLocation(
+                latitude: e["loc_lat"],
+                longitude: e["loc_lng"],
+                address: "",
+              ),
             ))
         .toList();
     print(dataList.toString());

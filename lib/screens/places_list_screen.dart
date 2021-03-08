@@ -93,6 +93,9 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                               title: Text(
                                 "${userPlace.items[index].title}",
                               ),
+                              subtitle: Text(
+                                "${userPlace.items[index].location.latitude.toStringAsFixed(5)}, ${userPlace.items[index].location.longitude.toStringAsFixed(5)}",
+                              ),
                               leading: Hero(
                                 tag: userPlace.items[index].id,
                                 child: CircleAvatar(

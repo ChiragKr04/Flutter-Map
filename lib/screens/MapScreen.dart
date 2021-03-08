@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart' as lc;
 
 class MapScreen extends StatefulWidget {
   final LatLng initialLocation;
@@ -14,11 +15,24 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
   bool defaultMarker = true;
+  LatLng defaultCords;
 
   void _selectLocation(LatLng position) {
     setState(() {
       _pickedLocation = position;
     });
+  }
+
+  Future<LatLng> _getLocation() async {
+    final locationData = await lc.Location().getLocation();
+    defaultCords = LatLng(locationData.latitude, locationData.longitude);
+    return defaultCords;
+  }
+
+  @override
+  void didChangeDependencies() {
+    _getLocation();
+    super.didChangeDependencies();
   }
 
   void _changeDefaultMarker() {
@@ -38,7 +52,8 @@ class _MapScreenState extends State<MapScreen> {
             icon: Icon(Icons.check),
             onPressed: () {
               print("backed location $_pickedLocation");
-              Navigator.of(context).pop(_pickedLocation);
+              Navigator.of(context).pop(
+                  _pickedLocation == null ? defaultCords : _pickedLocation);
             },
           ),
         ],

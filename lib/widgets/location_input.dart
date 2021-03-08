@@ -5,6 +5,8 @@ import 'package:native_device_cide/helper/location_helper.dart';
 import 'package:native_device_cide/screens/MapScreen.dart';
 
 class LocationInput extends StatefulWidget {
+  final Function onSelectPlace;
+  LocationInput(this.onSelectPlace);
   @override
   _LocationInputState createState() => _LocationInputState();
 }
@@ -14,6 +16,8 @@ class _LocationInputState extends State<LocationInput> {
   bool _isLoading = false;
   LatLng defaultCords;
   LatLng backedResult;
+  String mapBoxToken =
+      "pk.eyJ1IjoiY2hpcmFnMDQ2OSIsImEiOiJja2x1bGxxYXIwamhsMm5zNXN0bXdtM2owIn0.IllYOMgnei87qftMxXJ-sg";
 
   Future<void> _getUserLocation() async {
     setState(() {
@@ -32,6 +36,7 @@ class _LocationInputState extends State<LocationInput> {
       _previewImageUrl = staticMapUrl;
       print(_previewImageUrl);
     });
+    widget.onSelectPlace(locationData.latitude, locationData.longitude);
   }
 
   Future<LatLng> _getLocation() async {
@@ -43,6 +48,8 @@ class _LocationInputState extends State<LocationInput> {
   @override
   void didChangeDependencies() {
     _getLocation();
+    // getPlacess();
+    // getPlaces();
     super.didChangeDependencies();
   }
 
@@ -113,6 +120,8 @@ class _LocationInputState extends State<LocationInput> {
                     print(_previewImageUrl);
                     _previewImageUrl = getUrl;
                   });
+                  widget.onSelectPlace(
+                      backedResult.latitude, backedResult.longitude);
                 },
                 icon: Icon(Icons.map_outlined),
                 label: Text("Select on Map"),

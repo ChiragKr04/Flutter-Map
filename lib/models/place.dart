@@ -16,7 +16,7 @@ class PlaceLocation {
 class Place with ChangeNotifier {
   final String id;
   final String title;
-  final String location;
+  final PlaceLocation location;
   final File image;
 
   Place({
